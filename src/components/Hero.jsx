@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 export default function Hero() {
 	return (
-		<section className="relative overflow-hidden px-4 py-20 text-white sm:px-6 lg:px-8">
+		<section className="flex-col min-h-[80vh] px-4 py-20 text-white sm:px-6 lg:px-8">
 			<p className="text-sm uppercase tracking-widest text-neutral-400 mb-4">
 				Full stack developer
 			</p>
