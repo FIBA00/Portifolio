@@ -27,7 +27,7 @@ body {
 		box-shadow:
 			inset 0 15px 25px -10px rgba(0, 0, 0, 0.8),
 			inset 0 -5px 15px -5px rgba(0, 0, 0, 0.6);
-		border-radius: 24px;
+		border-radius: 16px;
 	}
 
 	.metal-split-orange {
@@ -38,7 +38,7 @@ body {
 			var(--color-neon) 55%,
 			var(--color-neon) 100%
 		);
-		border-radius: 24px;
+		border-radius: 10px;
 		box-shadow: inset 0 15px 25px -10px rgba(0, 0, 0, 0.8);
 	}
 
