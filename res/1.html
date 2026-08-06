@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CyberGrid Dashboard</title>
+    
+    <!-- Tailwind CSS v4 CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Custom Config for Colors -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        base: '#121417',      
+                        plate: '#2A3138',     
+                        plateDark: '#1F242A', 
+                        teal: '#2A5A68',      
+                        neon: '#D94507',      
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        
+        body { font-family: 'Inter', sans-serif; background-color: #121417; }
+
+        /* Custom Recessed Metal Cards (Tailwind can't do inset shadows easily) */
+        .metal-card {
+            background: linear-gradient(145deg, #2A3138, #1F242A);
+            box-shadow: inset 0 15px 25px -10px rgba(0,0,0,0.8), inset 0 -5px 15px -5px rgba(0,0,0,0.6);
+            border-radius: 24px;
+        }
+
+        /* Split Color Card (Half Grey, Half Neon) */
+        .metal-split-orange {
+            background: linear-gradient(90deg, #2A3138 0%, #2A3138 55%, #D94507 55%, #D94507 100%);
+            border-radius: 24px;
+            box-shadow: inset 0 15px 25px -10px rgba(0,0,0,0.8);
+        }
+        
+        .metal-split-teal {
+            background: linear-gradient(90deg, #2A3138 0%, #2A3138 70%, #2A5A68 70%, #2A5A68 100%);
+            border-radius: 24px;
+            box-shadow: inset 0 15px 25px -10px rgba(0,0,0,0.8);
+        }
+
+        /* The Glowing Edge Backlight */
+        .glow-orange { position: relative; }
+        .glow-orange::after {
+            content: ''; position: absolute; inset: 0; border-radius: 24px;
+            box-shadow: 8px 12px 35px -5px rgba(217, 69, 7, 0.5); z-index: -1;
+        }
+        
+        .glow-teal { position: relative; }
+        .glow-teal::after {
+            content: ''; position: absolute; inset: 0; border-radius: 24px;
+            box-shadow: 8px 12px 35px -5px rgba(42, 90, 104, 0.5); z-index: -1;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #121417; }
+        ::-webkit-scrollbar-thumb { background: #2A3138; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #3f4852; }
+    </style>
+</head>
+<body class="flex h-screen overflow-hidden text-gray-300">
+
+    <!-- 1. SIDEBAR -->
+    <aside class="w-64 bg-[#1A1E23] border-r border-white/5 flex flex-col h-full shrink-0">
+        <div class="h-16 flex items-center px-6 border-b border-white/5">
+            <span class="text-xl font-bold tracking-tight text-white flex items-center gap-2">
+                <span class="text-neon">◆</span> CYBER<span class="text-neon">GRID</span>
+            </span>
+        </div>
+        <nav class="flex-1 p-4 space-y-1 overflow-y-auto">
+            <div class="text-xs font-semibold text-gray-500 uppercase px-3 py-2">Main</div>
+            <a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-xl bg-plate/50 text-white shadow-sm border border-white/5 transition-all">
+                <span class="text-neon">◉</span> Dashboard
+            </a>
+            <a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-plate/30 transition-all">
+                <span>◇</span> Analytics
+            </a>
+            <a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-plate/30 transition-all">
+                <span>□</span> Orders
+            </a>
+            <div class="text-xs font-semibold text-gray-500 uppercase px-3 py-4 mt-4">Management</div>
+            <a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-plate/30 transition-all">
+                <span>△</span> Products
+            </a>
+            <a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-plate/30 transition-all">
+                <span>▽</span> Customers
+            </a>
+        </nav>
+        <div class="p-4 border-t border-white/5">
+            <button class="w-full py-2 metal-card glow-orange text-neon font-semibold text-sm hover:text-white transition-colors">Log Out</button>
+        </div>
+    </aside>
+
+    <!-- 2. MAIN CONTENT AREA -->
+    <main class="flex-1 flex flex-col h-screen overflow-hidden relative">
+        
+        <!-- Top Header -->
+        <header class="h-16 bg-[#1A1E23]/80 backdrop-blur-md border-b border-white/5 flex items-center justify-between px-8 shrink-0">
+            <h2 class="text-lg font-medium text-white">Dashboard Overview</h2>
+            <div class="flex items-center gap-4">
+                <div class="w-8 h-8 rounded-full metal-card glow-teal flex items-center justify-center text-xs text-teal-200">U</div>
+            </div>
+        </header>
+
+        <!-- Scrollable Content -->
+        <div class="flex-1 overflow-y-auto p-8 space-y-8">
+
+            <!-- 3. KPI STATS GRID (Showcasing the Card Types) -->
+            <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
+                
+                <!-- Stat 1: Standard Recessed Card -->
+                <div class="metal-card glow-orange p-6">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <p class="text-xs uppercase tracking-wider text-gray-500 font-semibold">Total Revenue</p>
+                            <h3 class="text-3xl font-bold text-white mt-1">$48.5k</h3>
+                        </div>
+                        <span class="text-neon text-2xl">↑</span>
+                    </div>
+                    <p class="text-xs text-gray-500 mt-4"><span class="text-green-400">+12.5%</span> from last month</p>
+                </div>
+
+                <!-- Stat 2: Split Teal Card -->
+                <div class="metal-split-teal glow-teal p-6 relative overflow-hidden">
+                    <div>
+                        <p class="text-xs uppercase tracking-wider text-gray-500 font-semibold">Active Users</p>
+                        <h3 class="text-3xl font-bold text-teal-100 mt-1">2,401</h3>
+                    </div>
+                    <p class="text-xs text-gray-500 mt-4"><span class="text-green-400">+5.2%</span> this week</p>
+                </div>
+
+                <!-- Stat 3: Split Orange Card -->
+                <div class="metal-split-orange glow-orange p-6 relative overflow-hidden">
+                    <div>
+                        <p class="text-xs uppercase tracking-wider text-gray-500 font-semibold">Conversion</p>
+                        <h3 class="text-3xl font-bold text-white mt-1">24.8%</h3>
+                    </div>
+                    <p class="text-xs text-gray-500 mt-4">Target: 25%</p>
+                </div>
+
+                <!-- Stat 4: Standard Recessed Card -->
+                <div class="metal-card glow-teal p-6">
+                    <div>
+                        <p class="text-xs uppercase tracking-wider text-gray-500 font-semibold">Avg. Session</p>
+                        <h3 class="text-3xl font-bold text-white mt-1">4m 12s</h3>
+                    </div>
+                    <p class="text-xs text-gray-500 mt-4"><span class="text-red-400">-0.5%</span> from last month</p>
+                </div>
+            </div>
+
+            <!-- 4. DATA TABLE & CHART SPLIT -->
+            <div class="grid grid-cols-1 xl:grid-cols-3 gap-6">
+
+                <!-- Chart Placeholder (Span 2 Columns) -->
+                <div class="xl:col-span-2 metal-card glow-orange p-6 flex flex-col">
+                    <div class="flex justify-between items-center mb-6">
+                        <h3 class="font-medium text-white">Revenue Overview</h3>
+                        <div class="flex gap-2 text-xs">
+                            <button class="px-3 py-1 rounded-lg bg-plate/50 border border-white/5 text-gray-400">Month</button>
+                            <button class="px-3 py-1 rounded-lg bg-neon/20 text-neon border border-neon/20">Year</button>
+                        </div>
+                    </div>
+                    <!-- Simulated Chart Grid -->
+                    <div class="flex-1 flex items-end justify-between gap-2 pb-2 border-b border-white/5 h-48">
+                        <div class="w-6 h-[30%] bg-gradient-to-t from-neon/80 to-neon/20 rounded-t-md shadow-[0_0_10px_rgba(217,69,7,0.4)]"></div>
+                        <div class="w-6 h-[50%] bg-gradient-to-t from-neon/80 to-neon/20 rounded-t-md shadow-[0_0_10px_rgba(217,69,7,0.4)]"></div>
+                        <div class="w-6 h-[45%] bg-gradient-to-t from-neon/80 to-neon/20 rounded-t-md shadow-[0_0_10px_rgba(217,69,7,0.4)]"></div>
+                        <div class="w-6 h-[85%] bg-gradient-to-t from-neon/80 to-neon/20 rounded-t-md shadow-[0_0_10px_rgba(217,69,7,0.4)]"></div>
+                        <div class="w-6 h-[70%] bg-gradient-to-t from-neon/80 to-neon/20 rounded-t-md shadow-[0_0_10px_rgba(217,69,7,0.4)]"></div>
+                        <div class="w-6 h-[60%] bg-gradient-to-t from-teal/80 to-teal/20 rounded-t-md shadow-[0_0_10px_rgba(42,90,104,0.4)]"></div>
+                        <div class="w-6 h-[90%] bg-gradient-to-t from-teal/80 to-teal/20 rounded-t-md shadow-[0_0_10px_rgba(42,90,104,0.4)]"></div>
+                    </div>
+                    <div class="flex justify-between text-xs text-gray-500 mt-2 px-1">
+                        <span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span>
+                    </div>
+                </div>
+
+                <!-- Recent Orders Table (Span 1 Column) -->
+                <div class="metal-card glow-teal p-6 flex flex-col">
+                    <h3 class="font-medium text-white mb-4">Recent Orders</h3>
+                    <div class="space-y-4 flex-1">
+                        <!-- Row 1 -->
+                        <div class="flex items-center justify-between text-sm border-b border-white/5 pb-3">
+                            <div class="flex items-center gap-3">
+                                <div class="w-2 h-2 rounded-full bg-green-400"></div>
+                                <span class="font-medium text-gray-200">#00241</span>
+                            </div>
+                            <span class="text-gray-400">$245.00</span>
+                        </div>
+                        <!-- Row 2 -->
+                        <div class="flex items-center justify-between text-sm border-b border-white/5 pb-3">
+                            <div class="flex items-center gap-3">
+                                <div class="w-2 h-2 rounded-full bg-orange-400"></div>
+                                <span class="font-medium text-gray-200">#00240</span>
+                            </div>
+                            <span class="text-gray-400">$1,280.00</span>
+                        </div>
+                        <!-- Row 3 -->
+                        <div class="flex items-center justify-between text-sm border-b border-white/5 pb-3">
+                            <div class="flex items-center gap-3">
+                                <div class="w-2 h-2 rounded-full bg-green-400"></div>
+                                <span class="font-medium text-gray-200">#00239</span>
+                            </div>
+                            <span class="text-gray-400">$82.50</span>
+                        </div>
+                        <!-- Row 4 -->
+                        <div class="flex items-center justify-between text-sm">
+                            <div class="flex items-center gap-3">
+                                <div class="w-2 h-2 rounded-full bg-red-400"></div>
+                                <span class="font-medium text-gray-200">#00238</span>
+                            </div>
+                            <span class="text-gray-400">$560.00</span>
+                        </div>
+                    </div>
+                    <button class="w-full mt-4 py-2 bg-plate/50 border border-white/5 rounded-xl text-xs text-gray-400 hover:text-white hover:border-white/20 transition-colors">View All Orders</button>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+</body>
+</html>
