@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import Hero from "../components/Hero";
 import GithubStats from "../components/GithubStats";
 
@@ -64,11 +65,11 @@ export default function Home() {
 					<h2 className="text-xl font-semibold text-white">
 						Featured Projects
 					</h2>
-					<a
-						href="/projects"
+					<Link
+						to="/projects"
 						className="text-sm text-neon hover:text-white transition">
 						View all →
-					</a>
+					</Link>
 				</div>
 				<div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
 					{featured.map((p) => (

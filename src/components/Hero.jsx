@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export default function Hero() {
 	return (
 		<section className="metal-card glow-orange p-10 md:p-16 relative overflow-hidden">
@@ -13,11 +15,11 @@ export default function Hero() {
 				whatever the problem actually needs.
 			</p>
 			<div className="mt-10 flex flex-wrap gap-4">
-				<a
-					href="/projects"
+				<Link
+					to="/projects"
 					className="px-6 py-3 bg-neon text-white font-medium rounded-md hover:bg-neon/80 transition shadow-[0_0_20px_rgba(217,69,7,0.4)]">
 					See my work
-				</a>
+				</Link>
 				<a
 					href="mailto:fraolbulti0@gmail.com"
 					className="px-6 py-3 border border-white/10 text-white font-medium rounded-md hover:border-white/30 transition">
